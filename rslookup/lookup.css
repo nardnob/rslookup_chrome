@@ -1,0 +1,76 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 4px;
+    background: white;
+}
+
+#input-section {
+    height: 50px;
+}
+
+#skill-section {
+    border-top: 1px solid lightgray;
+    padding-top: 5px;
+    width: 190px;
+}
+
+.skill-col {
+    border: 1px solid gray;
+    background-color: lightgray;
+    width: 60px;
+    height: 245px;
+    float: left;
+}
+
+.middle-col {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+#input-user {
+    font-size: 14px;
+    border: 1px solid rgba(128, 128, 128, 0.46);
+    border-radius: 0;
+    padding: 5px;
+    width: 178px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.collapsed {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.expandable-fast {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.expandable-normal {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.expandable-slow {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: all 0.75s ease;
+    -moz-transition: all 0.75s ease;
+    -o-transition: all 0.75s ease;
+    transition: all 0.75s ease;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "RS Lookup",
+  "description": "RS hiscores lookup",
+  "version": "1.0",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+      "default_title": "RS Lookup",
+      "default_icon": "icon.png",
+      "default_popup": "lookup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://code.jquery.com; object-src 'self'"
+}
