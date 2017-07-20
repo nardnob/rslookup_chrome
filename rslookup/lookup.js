@@ -1,7 +1,7 @@
 (function() {
 	var vm = this;
-	this.loadingCount = 0;
-	this.loadingControls = [];
+	vm.loadingCount = 0;
+	vm.loadingControls = [];
 
 	document.addEventListener('DOMContentLoaded', function () {
 		activate();
