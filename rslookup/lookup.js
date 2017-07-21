@@ -2,6 +2,7 @@
 	var vm = this;
 	vm.loadingCount = 0;
 	vm.loadingControls = [];
+	vm.rs3HiscoresApi = "http://services.runescape.com/m=hiscore/index_lite.ws?player=";
 
 	document.addEventListener('DOMContentLoaded', function () {
 		activate();
@@ -13,7 +14,7 @@
 	}
 
 	function registerLoadingControls() {
-		vm.loadingControls.push($("#input-user"));
+		vm.loadingControls.push($('#input-user'));
 	}
 
 	function registerEvents() {
@@ -44,28 +45,58 @@
 
 	function getUser(user) {
 		incrementLoading();
-		setTimeout(userReturned, 500);
+		collapseSkillSection();
+
+		$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
 	}
 
-	function userReturned() {
-		$('.collapsed').removeClass('collapsed');
+	function userReturned(user) {
+		expandSkillSection();
+		$('#input-user').val('success');
 		decrementLoading();
+		$('#input-user').select();
+	}
+
+	function failedToRetrieveUser() {
+		$('#input-user').val('failure');
+		decrementLoading();
+		$('#input-user').select();
 	}
 
 	function incrementLoading() {
-		if(vm.loadingCount <= 0) {
-			toggleLoadingControls(false);
-		}
-
 		vm.loadingCount++;
+
+		if(vm.loadingCount == 1) {
+			//If we've just begun loading, disable the loading controls
+			disableLoadingControls();
+		}
 	}
 
 	function decrementLoading() {
 		vm.loadingCount--;
 
-		if(vm.loadingCount <= 0) {
-			toggleLoadingControls(true);
+		if(vm.loadingCount == 0) {
+			//If we've just finished loading, enable the loading controls
+			enableLoadingControls();
 		}
+	}
+
+	function expandSkillSection() {
+		$('#skill-section').removeClass('collapsed');
+		$('.skill-col').removeClass('collapsed');
+	}
+
+	function collapseSkillSection() {
+		$('#skill-section').addClass('collapsed');
+		$('.skill-col').addClass('collapsed');
+	}
+
+	function enableLoadingControls() {
+		toggleLoadingControls(true);
+	}
+
+	function disableLoadingControls() {
+		toggleLoadingControls(false);
 	}
 
 	function toggleLoadingControls(enabled) {
