@@ -44,21 +44,20 @@
 	}
 
 	function getUser(user) {
-		incrementLoading();
 		collapseSkillSection();
-
+		incrementLoading();
 		$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
 	}
 
-	function userReturned(user) {
-		expandSkillSection();
-		$('#input-user').val('success');
+	function userReturned(userString) {
+		var user = mapUser(userString);
+
 		decrementLoading();
+		expandSkillSection(user);
 		$('#input-user').select();
 	}
 
 	function failedToRetrieveUser() {
-		$('#input-user').val('failure');
 		decrementLoading();
 		$('#input-user').select();
 	}
@@ -67,8 +66,8 @@
 		vm.loadingCount++;
 
 		if(vm.loadingCount == 1) {
-			//If we've just begun loading, disable the loading controls
-			disableLoadingControls();
+			//If we've just begun loading, hide the loading controls
+			hideLoadingControls();
 		}
 	}
 
@@ -76,14 +75,16 @@
 		vm.loadingCount--;
 
 		if(vm.loadingCount == 0) {
-			//If we've just finished loading, enable the loading controls
-			enableLoadingControls();
+			//If we've just finished loading, show the loading controls
+			showLoadingControls();
 		}
 	}
 
-	function expandSkillSection() {
+	function expandSkillSection(user) {
 		$('#skill-section').removeClass('collapsed');
 		$('.skill-col').removeClass('collapsed');
+
+		populateSkillSection(user);
 	}
 
 	function collapseSkillSection() {
@@ -91,17 +92,85 @@
 		$('.skill-col').addClass('collapsed');
 	}
 
-	function enableLoadingControls() {
+	function populateSkillSection(user) {
+		log(user);
+	}
+
+	function showLoadingControls() {
 		toggleLoadingControls(true);
 	}
 
-	function disableLoadingControls() {
+	function hideLoadingControls() {
 		toggleLoadingControls(false);
 	}
 
 	function toggleLoadingControls(enabled) {
 		for(var i = 0; i < vm.loadingControls.length; i++) {
 			vm.loadingControls[i].prop('disabled', !enabled);
+		}
+	}
+
+	function mapUser(userString) {
+		var user = {
+			stats: {
+			}
+		};
+
+		var statNamesArray = [
+			"overall",
+			"attack",
+			"defence",
+			"strength",
+			"constitution",
+			"ranged",
+			"prayer",
+			"magic",
+			"cooking",
+			"woodcutting",
+			"fletching",
+			"fishing",
+			"firemaking",
+			"crafting",
+			"smithing",
+			"mining",
+			"herblore",
+			"agility",
+			"thieving",
+			"slayer",
+			"farming",
+			"runecrafting",
+			"hunter",
+			"construction",
+			"summoning",
+			"dungeoneering",
+			"divination",
+			"invention"
+		];
+
+		var userValues = userString.trim().split(/\s+/);
+
+		if(userValues.length < statNamesArray.length) {
+			throw "Expected user values to be at least the length of the statNamesArray";
+		}
+
+		for(var i = 0; i < statNamesArray.length; i++) {
+			var statName = statNamesArray[i];
+			var stat = userValues[i];
+			var statFields = stat.split(',');
+
+			user.stats[statName] = {};
+
+			user.stats[statName].rank = statFields[0];
+			user.stats[statName].level = statFields[1];
+			user.stats[statName].experience = statFields[2];
+		}
+
+		return user;
+	}
+
+	function log(message) {
+		if(window.console) {
+			console.log(message);
 		}
 	}
 })();
