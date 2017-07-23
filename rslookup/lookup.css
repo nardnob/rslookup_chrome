@@ -12,14 +12,14 @@ body {
 #skill-section {
     border-top: 1px solid lightgray;
     padding-top: 5px;
-    width: 190px;
+    width: 175px;
 }
 
 .skill-col {
     border: 1px solid gray;
     background-color: lightgray;
-    width: 60px;
-    height: 245px;
+    width: 55px;
+    height: 243px;
     float: left;
 }
 
@@ -33,7 +33,7 @@ body {
     border: 1px solid rgba(128, 128, 128, 0.46);
     border-radius: 0;
     padding: 5px;
-    width: 178px;
+    width: 163px;
 }
 
 .clearfix {
@@ -73,4 +73,23 @@ body {
     -moz-transition: all 0.75s ease;
     -o-transition: all 0.75s ease;
     transition: all 0.75s ease;
+}
+
+.skill-cell {
+  height: 25px;
+  clear: both;
+}
+
+.skill-abbrev {
+  float: left;
+  border: 1px solid blue;
+  height: 100%;
+  width: 25px;
+}
+
+.skill-level {
+  float: right;
+  border: 1px solid green;
+  height: 100%;
+  width: 25px;
 }
