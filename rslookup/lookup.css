@@ -13,13 +13,14 @@ body {
     border-top: 1px solid lightgray;
     padding-top: 5px;
     width: 175px;
+  color: white;
 }
 
 .skill-col {
-    border: 1px solid gray;
-    background-color: lightgray;
+    border: 1px solid darkgray;
+    background-color: #2F2F2F;
     width: 55px;
-    height: 233px;
+    height: 278px;
     float: left;
 }
 
@@ -77,20 +78,18 @@ body {
 }
 
 .skill-cell {
-  height: 25px;
+  height: 30px;
   clear: both;
 }
 
 .skill-cell + .skill-cell {
-  border-top: 1px solid gray;
+  border-top: 1px solid darkgray;
 }
 
 .skill-abbrev {
   float: left;
-  width: 25px;
-  margin-left: 2px;
-  margin-top: 4px;
-  text-align: left;
+  width: 30px;
+  height: 30px;
 }
 
 .skill-level {
@@ -99,5 +98,5 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 15px;
-  margin-top: 2px;
+  margin-top: 4px;
 }
