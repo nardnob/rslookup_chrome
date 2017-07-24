@@ -9,6 +9,7 @@
 	});
 
 	function activate() {
+		$('#input-user').focus();
 		registerLoadingControls();
 		registerEvents();
 	}
@@ -46,7 +47,16 @@
 	function getUser(user) {
 		collapseSkillSection();
 		incrementLoading();
-		$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
+		//$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
+		setTimeout(mockupUserReturned, 1000);
+	}
+
+	function mockupUserReturned(userString) {
+		var user = mockupUser();
+
+		decrementLoading();
+		expandSkillSection(user);
+		$('#input-user').select();
 	}
 
 	function userReturned(userString) {
@@ -163,6 +173,56 @@
 			user.stats[statName].rank = statFields[0];
 			user.stats[statName].level = statFields[1];
 			user.stats[statName].experience = statFields[2];
+		}
+
+		return user;
+	}
+
+	function mockupUser() {
+		var user = {
+			stats: {
+			}
+		};
+
+		var statNamesArray = [
+			"overall",
+			"attack",
+			"defence",
+			"strength",
+			"constitution",
+			"ranged",
+			"prayer",
+			"magic",
+			"cooking",
+			"woodcutting",
+			"fletching",
+			"fishing",
+			"firemaking",
+			"crafting",
+			"smithing",
+			"mining",
+			"herblore",
+			"agility",
+			"thieving",
+			"slayer",
+			"farming",
+			"runecrafting",
+			"hunter",
+			"construction",
+			"summoning",
+			"dungeoneering",
+			"divination",
+			"invention"
+		];
+
+		for(var i = 0; i < statNamesArray.length; i++) {
+			var statName = statNamesArray[i];
+
+			user.stats[statName] = {};
+
+			user.stats[statName].rank = 1000;
+			user.stats[statName].level = 99;
+			user.stats[statName].experience = 14000000;
 		}
 
 		return user;
