@@ -104,6 +104,32 @@
 
 	function populateSkillSection(user) {
 		log(user);
+		$($('#attack .skill-level')[0]).text(user.stats["attack"].level.toString());
+		$($('#strength .skill-level')[0]).text(user.stats["strength"].level.toString());
+		$($('#defence .skill-level')[0]).text(user.stats["defence"].level.toString());
+		$($('#ranged .skill-level')[0]).text(user.stats["ranged"].level.toString());
+		$($('#prayer .skill-level')[0]).text(user.stats["prayer"].level.toString());
+		$($('#magic .skill-level')[0]).text(user.stats["magic"].level.toString());
+		$($('#runecrafting .skill-level')[0]).text(user.stats["runecrafting"].level.toString());
+		$($('#construction .skill-level')[0]).text(user.stats["construction"].level.toString());
+		$($('#dungeoneering .skill-level')[0]).text(user.stats["dungeoneering"].level.toString());
+		$($('#constitution .skill-level')[0]).text(user.stats["constitution"].level.toString());
+		$($('#agility .skill-level')[0]).text(user.stats["agility"].level.toString());
+		$($('#herblore .skill-level')[0]).text(user.stats["herblore"].level.toString());
+		$($('#thieving .skill-level')[0]).text(user.stats["thieving"].level.toString());
+		$($('#crafting .skill-level')[0]).text(user.stats["crafting"].level.toString());
+		$($('#fletching .skill-level')[0]).text(user.stats["fletching"].level.toString());
+		$($('#slayer .skill-level')[0]).text(user.stats["slayer"].level.toString());
+		$($('#hunting .skill-level')[0]).text(user.stats["hunting"].level.toString());
+		$($('#divination .skill-level')[0]).text(user.stats["divination"].level.toString());
+		$($('#mining .skill-level')[0]).text(user.stats["mining"].level.toString());
+		$($('#smithing .skill-level')[0]).text(user.stats["smithing"].level.toString());
+		$($('#fishing .skill-level')[0]).text(user.stats["fishing"].level.toString());
+		$($('#cooking .skill-level')[0]).text(user.stats["cooking"].level.toString());
+		$($('#firemaking .skill-level')[0]).text(user.stats["firemaking"].level.toString());
+		$($('#woodcutting .skill-level')[0]).text(user.stats["woodcutting"].level.toString());
+		$($('#farming .skill-level')[0]).text(user.stats["farming"].level.toString());
+		$($('#summoning .skill-level')[0]).text(user.stats["summoning"].level.toString());
 	}
 
 	function showLoadingControls() {
@@ -149,7 +175,7 @@
 			"slayer",
 			"farming",
 			"runecrafting",
-			"hunter",
+			"hunting",
 			"construction",
 			"summoning",
 			"dungeoneering",
@@ -207,7 +233,7 @@
 			"slayer",
 			"farming",
 			"runecrafting",
-			"hunter",
+			"hunting",
 			"construction",
 			"summoning",
 			"dungeoneering",
@@ -221,7 +247,7 @@
 			user.stats[statName] = {};
 
 			user.stats[statName].rank = 1000;
-			user.stats[statName].level = 99;
+			user.stats[statName].level = i;
 			user.stats[statName].experience = 14000000;
 		}
 
