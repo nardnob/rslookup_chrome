@@ -25,7 +25,7 @@ body {
 }
 
 .skill-col {
-    background-color: #2F2F2F;
+    background-color: #404040;
     width: 55px;
     height: 278px;
     float: left;
@@ -58,6 +58,7 @@ body {
   font-weight: bold;
   font-size: 15px;
   margin-top: 4px;
+  cursor: default;
 }
 
 .clearfix {
@@ -76,26 +77,26 @@ body {
 .expandable-fast {
     visibility: visible;
     opacity: 1;
-    -webkit-transition: all 0.25s ease;
-    -moz-transition: all 0.25s ease;
-    -o-transition: all 0.25s ease;
-    transition: all 0.25s ease;
+    -webkit-transition: all 0.33s ease;
+    -moz-transition: all 0.33s ease;
+    -o-transition: all 0.33s ease;
+    transition: all 0.33s ease;
 }
 
 .expandable-normal {
     visibility: visible;
     opacity: 1;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 0.66s ease;
+    -moz-transition: all 0.66s ease;
+    -o-transition: all 0.66s ease;
+    transition: all 0.66s ease;
 }
 
 .expandable-slow {
     visibility: visible;
     opacity: 1;
-    -webkit-transition: all 0.75s ease;
-    -moz-transition: all 0.75s ease;
-    -o-transition: all 0.75s ease;
-    transition: all 0.75s ease;
+    -webkit-transition: all 0.99s ease;
+    -moz-transition: all 0.99s ease;
+    -o-transition: all 0.99s ease;
+    transition: all 0.99s ease;
 }
