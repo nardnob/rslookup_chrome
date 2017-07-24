@@ -47,12 +47,13 @@
 	function getUser(user) {
 		collapseSkillSection();
 		incrementLoading();
-		//$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
-		setTimeout(mockupUserReturned, 1000);
+		$.get(vm.rs3HiscoresApi + user, userReturned).fail(failedToRetrieveUser);
+		//setTimeout(mockupUserReturned, 1000);
 	}
 
 	function mockupUserReturned(userString) {
 		var user = mockupUser();
+		log(user);
 
 		decrementLoading();
 		expandSkillSection(user);
@@ -61,6 +62,7 @@
 
 	function userReturned(userString) {
 		var user = mapUser(userString);
+		log(user);
 
 		decrementLoading();
 		expandSkillSection(user);
@@ -103,33 +105,36 @@
 	}
 
 	function populateSkillSection(user) {
-		log(user);
-		$($('#attack .skill-level')[0]).text(user.stats["attack"].level.toString());
-		$($('#strength .skill-level')[0]).text(user.stats["strength"].level.toString());
-		$($('#defence .skill-level')[0]).text(user.stats["defence"].level.toString());
-		$($('#ranged .skill-level')[0]).text(user.stats["ranged"].level.toString());
-		$($('#prayer .skill-level')[0]).text(user.stats["prayer"].level.toString());
-		$($('#magic .skill-level')[0]).text(user.stats["magic"].level.toString());
-		$($('#runecrafting .skill-level')[0]).text(user.stats["runecrafting"].level.toString());
-		$($('#construction .skill-level')[0]).text(user.stats["construction"].level.toString());
-		$($('#dungeoneering .skill-level')[0]).text(user.stats["dungeoneering"].level.toString());
-		$($('#constitution .skill-level')[0]).text(user.stats["constitution"].level.toString());
-		$($('#agility .skill-level')[0]).text(user.stats["agility"].level.toString());
-		$($('#herblore .skill-level')[0]).text(user.stats["herblore"].level.toString());
-		$($('#thieving .skill-level')[0]).text(user.stats["thieving"].level.toString());
-		$($('#crafting .skill-level')[0]).text(user.stats["crafting"].level.toString());
-		$($('#fletching .skill-level')[0]).text(user.stats["fletching"].level.toString());
-		$($('#slayer .skill-level')[0]).text(user.stats["slayer"].level.toString());
-		$($('#hunting .skill-level')[0]).text(user.stats["hunting"].level.toString());
-		$($('#divination .skill-level')[0]).text(user.stats["divination"].level.toString());
-		$($('#mining .skill-level')[0]).text(user.stats["mining"].level.toString());
-		$($('#smithing .skill-level')[0]).text(user.stats["smithing"].level.toString());
-		$($('#fishing .skill-level')[0]).text(user.stats["fishing"].level.toString());
-		$($('#cooking .skill-level')[0]).text(user.stats["cooking"].level.toString());
-		$($('#firemaking .skill-level')[0]).text(user.stats["firemaking"].level.toString());
-		$($('#woodcutting .skill-level')[0]).text(user.stats["woodcutting"].level.toString());
-		$($('#farming .skill-level')[0]).text(user.stats["farming"].level.toString());
-		$($('#summoning .skill-level')[0]).text(user.stats["summoning"].level.toString());
+		populateSkill("attack", user);
+		populateSkill("strength", user);
+		populateSkill("defence", user);
+		populateSkill("ranged", user);
+		populateSkill("prayer", user);
+		populateSkill("magic", user);
+		populateSkill("runecrafting", user);
+		populateSkill("construction", user);
+		populateSkill("dungeoneering", user);
+		populateSkill("constitution", user);
+		populateSkill("agility", user);
+		populateSkill("herblore", user);
+		populateSkill("thieving", user);
+		populateSkill("crafting", user);
+		populateSkill("fletching", user);
+		populateSkill("slayer", user);
+		populateSkill("hunting", user);
+		populateSkill("divination", user);
+		populateSkill("mining", user);
+		populateSkill("smithing", user);
+		populateSkill("fishing", user);
+		populateSkill("cooking", user);
+		populateSkill("firemaking", user);
+		populateSkill("woodcutting", user);
+		populateSkill("farming", user);
+		populateSkill("summoning", user);
+	}
+
+	function populateSkill(skillName, user) {
+		$($('#' + skillName + ' .skill-level')[0]).text(user.stats[skillName].level.toString());
 	}
 
 	function showLoadingControls() {
