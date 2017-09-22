@@ -1,12 +1,12 @@
 {
-  "name": "RS Lookup",
-  "description": "RS hiscores lookup",
-  "version": "1.0",
+  "name": "RuneScape 3 Hiscores",
+  "description": "RuneScape 3 hiscores lookup",
+  "version": "1.0.0.1",
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
   "browser_action": {
-      "default_title": "RS Lookup",
+      "default_title": "RuneScape 3 Hiscores",
       "default_icon": "icon.png",
       "default_popup": "lookup.html"
   },
