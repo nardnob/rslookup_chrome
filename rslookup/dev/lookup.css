@@ -61,6 +61,19 @@ body {
   cursor: default;
 }
 
+.skill-summary {
+  border: 1px solid red;
+  background-color: #404040;
+}
+
+.summary-row {
+  border: 1px solid blue;
+  height: 20px;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bold;
+}
+
 .clearfix {
     clear: both;
 }
