@@ -1,7 +1,7 @@
 {
   "name": "RuneScape 3 Hiscores",
   "description": "RuneScape 3 hiscores lookup",
-  "version": "1.0.0.3",
+  "version": "1.0.0.4",
   "permissions": [
     "http://*/*", "https://*/*"
   ],
