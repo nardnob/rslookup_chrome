@@ -20,13 +20,13 @@ body {
 #skill-section {
     border-top: 1px solid lightgray;
     padding-top: 5px;
-    width: 167px;
+    width: 182px;
   color: white;
 }
 
 .skill-col {
     background-color: #404040;
-    width: 55px;
+    width: 60px;
     height: 278px;
     float: left;
 }
@@ -54,7 +54,8 @@ body {
 .skill-level {
   float: right;
   width: 25px;
-  text-align: center;
+  padding-right: 5px;
+  text-align: right;
   font-weight: bold;
   font-size: 15px;
   margin-top: 4px;
