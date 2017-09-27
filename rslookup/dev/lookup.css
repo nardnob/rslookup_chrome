@@ -62,15 +62,19 @@ body {
 }
 
 .skill-summary {
-  border: 1px solid red;
   background-color: #404040;
+  margin-top: 1px;
 }
 
 .summary-row {
-  border: 1px solid blue;
   height: 20px;
   vertical-align: middle;
   font-size: 13px;
+  border-top: 1px solid lightgray;
+  padding-left: 3px;
+}
+
+.summary-level {
   font-weight: bold;
 }
 

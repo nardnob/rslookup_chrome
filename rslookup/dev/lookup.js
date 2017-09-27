@@ -61,7 +61,8 @@
 	}
 
 	function userReturned(userString) {
-		var user = mapUser(userString);
+		var user = parseUser(userString);
+		getCombatLevels(user);
 		log(user);
 
 		decrementLoading();
@@ -97,11 +98,46 @@
 		$('.skill-col').removeClass('collapsed');
 
 		populateSkillSection(user);
+		populateSummary(user)
 	}
 
 	function collapseSkillSection() {
 		$('#skill-section').addClass('collapsed');
 		$('.skill-col').addClass('collapsed');
+	}
+
+	function getCombatLevels(user) {
+		var stats = user.stats;
+
+		stats.combat = {
+			level: calculateCombatLevel(user)
+		};
+
+		var f2pCombat = calculateCombatLevel(user, false);
+		stats.f2pCombat = {
+			level: f2pCombat
+		};
+	}
+
+	function calculateCombatLevel(user, isMember = true) {
+		//((13/10) * max((Att + Str), 2Mag, 2Rng) + Def + Const + (1/2)Pray + (1/2)Summ) / 4
+		var stats = user.stats;
+
+		var meleeFactor = stats.attack.level + stats.strength.level;
+		var magicFactor = 2 * stats.magic.level;
+		var rangedFactor = 2 * stats.ranged.level;
+		var offenciveFactor = Math.max(meleeFactor, magicFactor, rangedFactor);
+
+		var defenceFactor = stats.defence.level;
+		var constitutionFactor = stats.constitution.level;
+		var prayerFactor = Math.floor(0.5 * stats.prayer.level);
+		var summoningFactor = isMember ? Math.floor(0.5 * stats.summoning.level) : 0;
+		var defenciveFactor = defenceFactor + constitutionFactor + prayerFactor + summoningFactor;
+
+		var dividend = (13/10) * offenciveFactor + defenciveFactor;
+		var divisor = 4;
+
+		return Math.floor(dividend / divisor);
 	}
 
 	function populateSkillSection(user) {
@@ -137,6 +173,21 @@
 		$($('#' + skillName + ' .skill-level')[0]).text(user.stats[skillName].level.toString());
 	}
 
+	function populateSummary(user) {
+		var stats = user.stats;
+
+		$("#total-level").text(stats.total.level.toString());
+		$("#combat-level").text(stats.combat.level.toString());
+
+		var f2pCombatDifference = stats.combat.level - stats.f2pCombat.level;
+		if(f2pCombatDifference > 0) {
+			var f2pCombatLevelString = " (" + stats.f2pCombat.level.toString() + " + " + f2pCombatDifference.toString() + ")";
+			$("#f2p-combat-level").text(f2pCombatLevelString);
+		} else {
+			$("#f2p-combat-level").text("");
+		}
+	}
+
 	function showLoadingControls() {
 		toggleLoadingControls(true);
 	}
@@ -151,14 +202,14 @@
 		}
 	}
 
-	function mapUser(userString) {
+	function parseUser(userString) {
 		var user = {
 			stats: {
 			}
 		};
 
 		var statNamesArray = [
-			"overall",
+			"total",
 			"attack",
 			"defence",
 			"strength",
@@ -201,9 +252,9 @@
 
 			user.stats[statName] = {};
 
-			user.stats[statName].rank = statFields[0];
-			user.stats[statName].level = statFields[1];
-			user.stats[statName].experience = statFields[2];
+			user.stats[statName].rank = parseInt(statFields[0]);
+			user.stats[statName].level = parseInt(statFields[1]);
+			user.stats[statName].experience = parseInt(statFields[2]);
 		}
 
 		return user;
@@ -216,7 +267,7 @@
 		};
 
 		var statNamesArray = [
-			"overall",
+			"total",
 			"attack",
 			"defence",
 			"strength",
