@@ -169,8 +169,16 @@
 		populateSkill("summoning", user);
 	}
 
-	function populateSkill(skillName, user) {
-		$($('#' + skillName + ' .skill-level')[0]).text(user.stats[skillName].level.toString());
+	function populateSkill(skill, user) {
+		var level = user.stats[skill].level.toString();
+		var experience = user.stats[skill].experience.toString();
+
+		$($('#' + skill + ' .skill-level')[0]).text(level);
+		$('#' + skill).prop('title', "Exp: " + numberWithCommas(experience));
+	}
+
+	function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
 	function populateSummary(user) {
