@@ -205,7 +205,7 @@
 	}
 
 	function calculateCombatLevel(user, isMember = true) {
-		//((13/10) * max((Att + Str), 2Mag, 2Rng) + Def + Const + (1/2)Pray + (1/2)Summ) / 4
+		//Combat formula: ((13/10) * max((Att + Str), 2Mag, 2Rng) + Def + Const + (1/2)Pray + (1/2)Summ) / 4
 		var stats = user.stats;
 
 		var meleeFactor = stats.attack.level + stats.strength.level;
