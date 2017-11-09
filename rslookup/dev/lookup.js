@@ -1,8 +1,71 @@
 (function() {
 	var vm = this;
+
 	vm.loadingCount = 0;
 	vm.loadingControls = [];
 	vm.rs3HiscoresApi = "http://services.runescape.com/m=hiscore/index_lite.ws?player=";
+
+	vm.apiSkills = [
+		"total",
+		"attack",
+		"defence",
+		"strength",
+		"constitution",
+		"ranged",
+		"prayer",
+		"magic",
+		"cooking",
+		"woodcutting",
+		"fletching",
+		"fishing",
+		"firemaking",
+		"crafting",
+		"smithing",
+		"mining",
+		"herblore",
+		"agility",
+		"thieving",
+		"slayer",
+		"farming",
+		"runecrafting",
+		"hunting",
+		"construction",
+		"summoning",
+		"dungeoneering",
+		"divination",
+		"invention"
+	];
+
+	vm.userSkills = [
+		"attack",
+		"strength",
+		"defence",
+		"ranged",
+		"prayer",
+		"magic",
+		"runecrafting",
+		"construction",
+		"dungeoneering",
+		"constitution",
+		"agility",
+		"herblore",
+		"thieving",
+		"crafting",
+		"fletching",
+		"slayer",
+		"hunting",
+		"divination",
+		"mining",
+		"smithing",
+		"fishing",
+		"cooking",
+		"firemaking",
+		"woodcutting",
+		"farming",
+		"summoning"
+	];
+
+	///////////////////////////////////
 
 	document.addEventListener('DOMContentLoaded', function () {
 		activate();
@@ -19,11 +82,23 @@
 	}
 
 	function registerEvents() {
+		registerEnterEvent();
+		registerMouseoverEvents();
+	}
+
+	function registerEnterEvent() {
 		$('#input-user').keyup(function(e) {
 		    if(e.keyCode == 13) {
 		    	enterPressed();
 		    }
 		});
+	}
+
+	function registerMouseoverEvents() {
+		for(var i = 0; i < vm.userSkills.length; i++) {
+			$("#" + vm.userSkills[i]).mouseover(mouseoverSkill);
+			$("#" + vm.userSkills[i]).mouseout(mouseoutSkill);
+		}
 	}
 
 	function enterPressed() {
@@ -34,6 +109,16 @@
 		}
 
 		getUser(user);
+	}
+
+	function mouseoverSkill() {
+		//console.log("mouseoverSkill()");
+		//console.log(this);
+	}
+
+	function mouseoutSkill() {
+		//console.log("mouseoutSkill()");
+		//console.log(this);
 	}
 
 	function validUser(user) {
@@ -98,7 +183,7 @@
 		$('.skill-col').removeClass('collapsed');
 
 		populateSkillSection(user);
-		populateSummary(user)
+		populateTotalSummary(user)
 	}
 
 	function collapseSkillSection() {
@@ -141,32 +226,9 @@
 	}
 
 	function populateSkillSection(user) {
-		populateSkill("attack", user);
-		populateSkill("strength", user);
-		populateSkill("defence", user);
-		populateSkill("ranged", user);
-		populateSkill("prayer", user);
-		populateSkill("magic", user);
-		populateSkill("runecrafting", user);
-		populateSkill("construction", user);
-		populateSkill("dungeoneering", user);
-		populateSkill("constitution", user);
-		populateSkill("agility", user);
-		populateSkill("herblore", user);
-		populateSkill("thieving", user);
-		populateSkill("crafting", user);
-		populateSkill("fletching", user);
-		populateSkill("slayer", user);
-		populateSkill("hunting", user);
-		populateSkill("divination", user);
-		populateSkill("mining", user);
-		populateSkill("smithing", user);
-		populateSkill("fishing", user);
-		populateSkill("cooking", user);
-		populateSkill("firemaking", user);
-		populateSkill("woodcutting", user);
-		populateSkill("farming", user);
-		populateSkill("summoning", user);
+		for(var i = 0; i < vm.userSkills.length; i++) {
+			populateSkill(vm.userSkills[i], user);
+		}
 	}
 
 	function populateSkill(skill, user) {
@@ -181,7 +243,7 @@
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
-	function populateSummary(user) {
+	function populateTotalSummary(user) {
 		var stats = user.stats;
 
 		$("#total-level").text(stats.total.level.toString());
@@ -216,45 +278,14 @@
 			}
 		};
 
-		var statNamesArray = [
-			"total",
-			"attack",
-			"defence",
-			"strength",
-			"constitution",
-			"ranged",
-			"prayer",
-			"magic",
-			"cooking",
-			"woodcutting",
-			"fletching",
-			"fishing",
-			"firemaking",
-			"crafting",
-			"smithing",
-			"mining",
-			"herblore",
-			"agility",
-			"thieving",
-			"slayer",
-			"farming",
-			"runecrafting",
-			"hunting",
-			"construction",
-			"summoning",
-			"dungeoneering",
-			"divination",
-			"invention"
-		];
-
 		var userValues = userString.trim().split(/\s+/);
 
-		if(userValues.length < statNamesArray.length) {
-			throw "Expected user values to be at least the length of the statNamesArray";
+		if(userValues.length < vm.apiSkills.length) {
+			throw "Expected user values to be at least the length of the vm.apiSkills";
 		}
 
-		for(var i = 0; i < statNamesArray.length; i++) {
-			var statName = statNamesArray[i];
+		for(var i = 0; i < vm.apiSkills.length; i++) {
+			var statName = vm.apiSkills[i];
 			var stat = userValues[i];
 			var statFields = stat.split(',');
 
@@ -274,39 +305,8 @@
 			}
 		};
 
-		var statNamesArray = [
-			"total",
-			"attack",
-			"defence",
-			"strength",
-			"constitution",
-			"ranged",
-			"prayer",
-			"magic",
-			"cooking",
-			"woodcutting",
-			"fletching",
-			"fishing",
-			"firemaking",
-			"crafting",
-			"smithing",
-			"mining",
-			"herblore",
-			"agility",
-			"thieving",
-			"slayer",
-			"farming",
-			"runecrafting",
-			"hunting",
-			"construction",
-			"summoning",
-			"dungeoneering",
-			"divination",
-			"invention"
-		];
-
-		for(var i = 0; i < statNamesArray.length; i++) {
-			var statName = statNamesArray[i];
+		for(var i = 0; i < vm.apiSkills.length; i++) {
+			var statName = vm.apiSkills[i];
 
 			user.stats[statName] = {};
 

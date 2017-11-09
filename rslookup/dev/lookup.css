@@ -87,7 +87,7 @@ body {
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.skill-summary {
+.total-summary, .skill-summary {
   background-color: #404040;
   margin-top: 1px;
 
@@ -110,6 +110,10 @@ body {
 
 .summary-level {
   font-weight: bold;
+}
+
+.hidden-summary {
+  display: none;
 }
 
 .clearfix {
